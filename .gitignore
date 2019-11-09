@@ -10,6 +10,17 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Gradle files
+.gradle/
+.gradletasknamecache
+build/
+
+# IDEA Ignores
+*.iml
+*.ipr
+*.iws
+.idea/
+
 # Package Files #
 *.jar
 *.war
