@@ -1,4 +1,4 @@
-package sample
+package eu.tobiasheine.movies.data
 
 expect class Sample() {
     fun checkMe(): Int
