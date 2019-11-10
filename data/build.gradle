@@ -4,7 +4,7 @@ plugins {
 repositories {
     mavenCentral()
 }
-group 'eu.tobiasheine.movies.data'
+group 'eu.tobiasheine.movies'
 version '0.0.1'
 
 apply plugin: 'maven-publish'
