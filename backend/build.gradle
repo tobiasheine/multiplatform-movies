@@ -23,6 +23,8 @@ kotlin {
 }
 
 dependencies {
+    compile("ch.qos.logback:logback-classic:1.2.3")
+    implementation "io.ktor:ktor-serialization:$ktor_version"
     compile "io.ktor:ktor-server-core:$ktor_version"
     compile "io.ktor:ktor-server-netty:$ktor_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
