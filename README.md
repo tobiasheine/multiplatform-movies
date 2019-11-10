@@ -1,5 +1,5 @@
 # Data
-A Kotlin Multiplatform Library exposing data transfer objects being shared between the `backend` and `frontend`.
+A Kotlin Multiplatform Library exposing data transfer objects being shared between `backend` and `frontend`.
 
 # Backend
 A JVM project exposing a Ktor HTTP API, including the `/movies` endpoint.
