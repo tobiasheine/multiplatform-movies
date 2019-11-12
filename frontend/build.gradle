@@ -31,10 +31,10 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-common')
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutine_version")
-                implementation("io.ktor:ktor-client-core:$ktor_version")
-                implementation("io.ktor:ktor-client-json:$ktor_version")
-                implementation("io.ktor:ktor-client-serialization:$ktor_version")
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutine_version"
+                implementation "io.ktor:ktor-client-core:$ktor_version"
+                implementation "io.ktor:ktor-client-json:$ktor_version"
+                implementation "io.ktor:ktor-client-serialization:$ktor_version"
                 implementation 'eu.tobiasheine.movies:data:0.0.1'
             }
         }
@@ -48,8 +48,9 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib')
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version")
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+                implementation "io.ktor:ktor-client-serialization-jvm:$ktor_version"
                 implementation "io.ktor:ktor-client-core-jvm:$ktor_version"
                 implementation "io.ktor:ktor-client-json-jvm:$ktor_version"
                 implementation "io.ktor:ktor-client-okhttp:$ktor_version"
@@ -64,11 +65,11 @@ kotlin {
         iosMain {
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutine_version")
-                implementation("io.ktor:ktor-client-ios:$ktor_version")
-                implementation("io.ktor:ktor-client-core-native:$ktor_version")
-                implementation("io.ktor:ktor-client-json-native:$ktor_version")
-                implementation("io.ktor:ktor-client-serialization-native:$ktor_version")
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutine_version"
+                implementation "io.ktor:ktor-client-ios:$ktor_version"
+                implementation "io.ktor:ktor-client-core-native:$ktor_version"
+                implementation "io.ktor:ktor-client-json-native:$ktor_version"
+                implementation "io.ktor:ktor-client-serialization-native:$ktor_version"
             }
         }
         iosTest {
