@@ -6,7 +6,7 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.get
 
-private const val BASE_URL: String = "https://127.0.0.1"
+private const val BASE_URL: String = "http://10.0.2.2:8080"
 
 class MoviesBackend {
 

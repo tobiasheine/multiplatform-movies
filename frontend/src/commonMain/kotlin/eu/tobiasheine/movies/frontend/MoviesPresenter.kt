@@ -12,13 +12,18 @@ class MoviesPresenter(
 ) : CoroutineScope {
 
     private lateinit var job: Job
+    private lateinit var view: View
 
     override val coroutineContext: CoroutineContext
         get() = uiContext + job + CoroutineExceptionHandler { _, throwable ->
             job = Job()
+            view.showError(throwable)
         }
 
     fun bind(view: View) {
+        this.view = view
+        job = Job()
+
         launch {
             val movieGallery = withContext(ioContext) {
                 moviesBackend.movieGallery()
@@ -29,5 +34,6 @@ class MoviesPresenter(
 
     interface View {
         fun render(movieGallery: MovieGallery)
+        fun showError(throwable: Throwable)
     }
 }

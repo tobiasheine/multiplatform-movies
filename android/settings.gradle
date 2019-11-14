@@ -1,2 +1,4 @@
 include ':app'
 rootProject.name='Multiplatform Movies'
+
+enableFeaturePreview('GRADLE_METADATA')

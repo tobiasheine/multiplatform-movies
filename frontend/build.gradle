@@ -38,7 +38,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-json:$ktor_version"
                 implementation "io.ktor:ktor-client-serialization:$ktor_version"
                 implementation "com.autodesk:coroutineworker:$coroutineWorker_version"
-                implementation "eu.tobiasheine.movies:data:$data_version"
+                api "eu.tobiasheine.movies:data:$data_version"
             }
         }
         commonTest {
