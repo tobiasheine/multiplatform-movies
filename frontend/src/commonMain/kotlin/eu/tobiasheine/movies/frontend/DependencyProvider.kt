@@ -4,8 +4,7 @@ object DependencyProvider {
 
     fun providePresenter(): MoviesPresenter =
         MoviesPresenter(
-            UI,
-            IO,
-            MoviesBackend()
+            uiContext = UI,
+            moviesBackend = MoviesBackend()
         )
 }

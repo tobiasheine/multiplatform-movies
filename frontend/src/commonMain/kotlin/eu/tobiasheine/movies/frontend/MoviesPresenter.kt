@@ -1,13 +1,14 @@
 package eu.tobiasheine.movies.frontend
 
-import com.autodesk.coroutineworker.CoroutineWorker.Companion.withContext
 import eu.tobiasheine.movies.data.MovieGallery
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class MoviesPresenter(
     private val uiContext: CoroutineContext,
-    private val ioContext: CoroutineContext,
     private val moviesBackend: MoviesBackend
 ) : CoroutineScope {
 
@@ -25,10 +26,8 @@ class MoviesPresenter(
         job = Job()
 
         launch {
-            val movieGallery = withContext(ioContext) {
-                moviesBackend.movieGallery()
-            }
-            view.render(movieGallery)
+            val gallery = moviesBackend.movieGallery()
+            view.render(gallery)
         }
     }
 
