@@ -25,7 +25,9 @@ kotlin {
     // Switch here to iosArm64 (or iosArm32) to build library for iPhone device
     iosX64("ios") {
         binaries {
-            framework()
+            framework {
+                baseName = "MoviesFrontend"
+            }
         }
     }
     sourceSets {
@@ -78,20 +80,26 @@ kotlin {
         iosTest {
         }
     }
-}
 
-task iosTest {
-    def device = project.findProperty("iosDevice")?.toString() ?: "iPhone 8"
-    dependsOn kotlin.targets.ios.binaries.getTest('DEBUG').linkTaskName
-    group = JavaBasePlugin.VERIFICATION_GROUP
-    description = "Runs tests for target 'ios' on an iOS simulator"
+    task packForXCode(type: Sync) {
+        final File frameworkDir = new File(buildDir, "xcode-frameworks")
+        final String mode = project.findProperty("CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
 
-    doLast {
-        def binary = kotlin.targets.ios.binaries.getTest('DEBUG').outputFile
-        exec {
-            commandLine 'xcrun', 'simctl', 'spawn', device, binary.absolutePath
+        inputs.property "mode", mode
+        dependsOn kotlin.targets.ios.binaries.getFramework(mode).linkTaskName
+
+        from { kotlin.targets.ios.binaries.getFramework(mode).outputDirectory }
+        into frameworkDir
+
+        doLast {
+            new File(frameworkDir, 'gradlew').with {
+                text = "#!/bin/bash\nexport 'JAVA_HOME=${System.getProperty("java.home")}'\ncd '${rootProject.rootDir}'\n./gradlew \$@\n"
+                setExecutable(true)
+            }
         }
     }
+
+    tasks.build.dependsOn packForXCode
 }
 
 configurations {
