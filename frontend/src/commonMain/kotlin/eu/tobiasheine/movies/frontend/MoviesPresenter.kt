@@ -13,6 +13,10 @@ class MoviesPresenter(
     private lateinit var job: Job
     private lateinit var view: View
 
+    init {
+//        ensureNeverFrozen()
+    }
+
     override val coroutineContext: CoroutineContext
         get() = uiContext + job + CoroutineExceptionHandler { _, throwable ->
             job = Job()
@@ -24,17 +28,18 @@ class MoviesPresenter(
         job = Job()
 
         launch {
-
             val gallery = withContext(ioContext) {
+                assertNotMainThread()
                 moviesBackend.movieGallery()
             }
-
             view.render(gallery)
         }
     }
 
     interface View {
+
         fun render(movieGallery: MovieGallery)
         fun showError(throwable: Throwable)
     }
 }
+

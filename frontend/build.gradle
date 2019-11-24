@@ -10,7 +10,6 @@ ext.coroutineWorker_version = '0.3.0'
 ext.data_version = '0.0.1'
 
 repositories {
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     mavenCentral()
     mavenLocal()
     jcenter()
