@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "B01BF9CA-D898-468C-A481-205B5C742577"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A996A88D-9CD8-440B-8296-F149B103150F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultiplatformMovies/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "MovieGalleryViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "A996A88D-9CD8-440B-8296-F149B103150F - ef2043de7357c8aa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplatformMovies.ViewController.init(collectionViewLayout: __C.UICollectionViewLayout) -&gt; MultiplatformMovies.ViewController"
+                  moduleName = "MultiplatformMovies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/th144x/Documents/repos/multiplatform-movies/ios/MultiplatformMovies/MultiplatformMovies/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "232">
+               </Location>
+               <Location
+                  uuid = "A996A88D-9CD8-440B-8296-F149B103150F - 470aabd6ea1c5131"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplatformMovies.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MultiplatformMovies.ViewController"
+                  moduleName = "MultiplatformMovies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/th144x/Documents/repos/multiplatform-movies/ios/MultiplatformMovies/MultiplatformMovies/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "328">
+               </Location>
+               <Location
+                  uuid = "A996A88D-9CD8-440B-8296-F149B103150F - d05d6c66efabcc74"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplatformMovies.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MultiplatformMovies.ViewController&gt;"
+                  moduleName = "MultiplatformMovies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/th144x/Documents/repos/multiplatform-movies/ios/MultiplatformMovies/MultiplatformMovies/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "266">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8A2A8B51-E232-4412-A71D-D94BE82D9C46"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultiplatformMovies/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "render(movieGallery:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

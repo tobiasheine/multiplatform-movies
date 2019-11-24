@@ -1,0 +1,6 @@
+framework module Pods_MultiplatformMovies_MultiplatformMoviesUITests {
+  umbrella header "Pods-MultiplatformMovies-MultiplatformMoviesUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
