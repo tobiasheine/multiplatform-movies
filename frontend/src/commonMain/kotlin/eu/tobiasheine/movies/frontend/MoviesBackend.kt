@@ -1,20 +1,17 @@
 package eu.tobiasheine.movies.frontend
 
 import eu.tobiasheine.movies.data.MovieGallery
-import io.ktor.client.HttpClient
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.request.get
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 
 expect val BASE_URL: String
 
 class MoviesBackend {
 
-    private val client = HttpClient {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer()
-        }
+    fun movieGallery(): MovieGallery = simpleGet("$BASE_URL/movies").let {
+        val json = Json(JsonConfiguration.Stable.copy(unquoted = true))
+        json.parse(MovieGallery.serializer(), it)
     }
-
-    suspend fun movieGallery(): MovieGallery = client.get("$BASE_URL/movies")
 }
+
+internal expect fun simpleGet(url: String): String
