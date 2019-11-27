@@ -7,8 +7,7 @@ A JVM project exposing a Ktor HTTP API, including the `/movies` endpoint.
 # Frontend
 A Kotlin Multiplatform Library consuming the `/movies` endpoint, shared bei `android` & `ios`.
 
-# Android
-TBD
+# Android & iOS
+Native mobile clients using the frontend library to render a movie gallery.
 
-# iOS
-TBD
+![Native apps screenshot](https://user-images.githubusercontent.com/1046688/69727862-4e987b00-10f1-11ea-8b5a-e5126d165daf.png)
