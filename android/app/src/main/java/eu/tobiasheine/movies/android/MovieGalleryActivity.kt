@@ -22,14 +22,11 @@ class MovieGalleryActivity : AppCompatActivity(), MoviesPresenter.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_gallery)
-
         movie_gallery.adapter = galleryAdapter
         movie_gallery.layoutManager = GridLayoutManager(this, NO_OF_COLUMNS)
-    }
 
-    override fun onResume() {
-        super.onResume()
-        presenter.bind(this)
+        presenter.setView(this)
+        presenter.loadMovies()
     }
 
     override fun render(movieGallery: MovieGallery) {

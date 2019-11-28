@@ -31,7 +31,8 @@ class MovieGalleryViewController: UICollectionViewController, MoviesPresenterVie
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
         collectionView?.register(MoviePosterCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        presenter.bind(view: self)
+        presenter.setView(view: self)
+        presenter.loadMovies()
     }
 }
 

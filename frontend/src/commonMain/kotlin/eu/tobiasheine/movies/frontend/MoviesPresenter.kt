@@ -21,16 +21,6 @@ class MoviesPresenter(
             view.showError(throwable)
         }
 
-    fun bind(view: View) {
-        this.view = view
-        job = Job()
-
-        launch {
-            val gallery = moviesBackend.movieGallery()
-            view.render(gallery)
-        }
-    }
-
     fun loadMovies() = launch {
         val gallery = moviesBackend.movieGallery()
         view.render(gallery)
