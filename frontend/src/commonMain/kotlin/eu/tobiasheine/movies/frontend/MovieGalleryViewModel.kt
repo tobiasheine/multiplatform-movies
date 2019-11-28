@@ -7,32 +7,36 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class MoviesPresenter(
+class MovieGalleryViewModel(
     private val uiContext: CoroutineContext,
     private val moviesBackend: MoviesBackend
 ) : CoroutineScope {
 
     private lateinit var job: Job
-    private lateinit var view: View
+    private lateinit var listerner: Listener
 
     override val coroutineContext: CoroutineContext
         get() = uiContext + job + CoroutineExceptionHandler { _, throwable ->
             job = Job()
-            view.showError(throwable)
+            listerner.onError(throwable)
         }
 
-    fun bind(view: View) {
-        this.view = view
-        job = Job()
-
-        launch {
-            val gallery = moviesBackend.movieGallery()
-            view.render(gallery)
-        }
+    fun loadMovies() = launch {
+        val gallery = moviesBackend.movieGallery()
+        listerner.onMovieGallery(gallery)
     }
 
-    interface View {
-        fun render(movieGallery: MovieGallery)
-        fun showError(throwable: Throwable)
+    fun setListener(listener: Listener) {
+        job = Job()
+        this.listerner = listener
+    }
+
+    fun clear() {
+        job.cancel()
+    }
+
+    interface Listener {
+        fun onMovieGallery(movieGallery: MovieGallery)
+        fun onError(throwable: Throwable)
     }
 }

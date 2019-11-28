@@ -2,9 +2,9 @@ package eu.tobiasheine.movies.frontend
 
 object DependencyProvider {
 
-    fun providePresenter(): MoviesPresenter =
-        MoviesPresenter(
+    fun provideViewModel() =
+        MovieGalleryViewModel(
             uiContext = UI,
-            moviesBackend = MoviesBackend()
+            moviesBackend = KtorMoviesBackend()
         )
 }
