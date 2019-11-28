@@ -31,6 +31,16 @@ class MoviesPresenter(
         }
     }
 
+    fun loadMovies() = launch {
+        val gallery = moviesBackend.movieGallery()
+        view.render(gallery)
+    }
+
+    fun setView(view: View) {
+        job = Job()
+        this.view = view
+    }
+
     interface View {
         fun render(movieGallery: MovieGallery)
         fun showError(throwable: Throwable)
