@@ -10,19 +10,19 @@ import UIKit
 import SDWebImage
 import MoviesFrontend
 
-class MovieGalleryViewController: UICollectionViewController, MoviesPresenterView {
+class MovieGalleryViewController: UICollectionViewController, MovieGalleryViewModelListener {
     
     private let cellIdentifier = "movie_poster"
     private var movies : [DataMovieGalleryItem] = []
-    private let presenter = DependencyProvider().providePresenter()
+    private let viewModel = DependencyProvider().provideViewModel()
     
-    func render(movieGallery: DataMovieGallery) {
+    func onMovieGallery(movieGallery: DataMovieGallery) {
         print(movieGallery.items.count)
         movies = movieGallery.items
         collectionView?.reloadData()
     }
     
-    func showError(throwable: KotlinThrowable) {
+    func onError(throwable: KotlinThrowable) {
         print(throwable.message!)
     }
     
@@ -31,9 +31,10 @@ class MovieGalleryViewController: UICollectionViewController, MoviesPresenterVie
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
         collectionView?.register(MoviePosterCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        presenter.setView(view: self)
-        presenter.loadMovies()
+        viewModel.setListener(listener: self)
+        viewModel.loadMovies()
     }
+    
 }
 
 //MARK: - UICollectionViewDatasource

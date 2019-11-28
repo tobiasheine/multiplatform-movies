@@ -7,7 +7,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.test.Test
 
-class MoviePresenterTest {
+class MovieGalleryViewModelTest {
 
     private val movieGallery = MovieGallery(emptyList())
     private val backend = object : MoviesBackend {
@@ -15,32 +15,32 @@ class MoviePresenterTest {
             MovieGallery(emptyList())
         }
     }
-    private val view = object : MoviesPresenter.View {
+    private val listener = object : MovieGalleryViewModel.Listener {
 
         private lateinit var movieGallery: MovieGallery
 
-        override fun render(movieGallery: MovieGallery) {
+        override fun onMovieGallery(movieGallery: MovieGallery) {
             this.movieGallery = movieGallery
         }
 
-        fun verifyDidRender(expectedMovieGallery: MovieGallery) {
+        fun verify(expectedMovieGallery: MovieGallery) {
             assert(movieGallery == expectedMovieGallery)
         }
 
-        override fun showError(throwable: Throwable) {
+        override fun onError(throwable: Throwable) {
             TODO("no error handling implemented")
         }
 
     }
-    private val presenter = MoviesPresenter(Dispatchers.Unconfined, backend)
+    private val viewModel = MovieGalleryViewModel(Dispatchers.Unconfined, backend)
 
     @Test
     fun render_movieGallery_from_backend() = suspendTest {
-        presenter.setView(view)
+        viewModel.setListener(listener)
 
-        presenter.loadMovies().join()
+        viewModel.loadMovies().join()
 
-        view.verifyDidRender(movieGallery)
+        listener.verify(movieGallery)
     }
 
 }
