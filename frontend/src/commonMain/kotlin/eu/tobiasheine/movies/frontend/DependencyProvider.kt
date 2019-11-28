@@ -5,6 +5,6 @@ object DependencyProvider {
     fun providePresenter(): MoviesPresenter =
         MoviesPresenter(
             uiContext = UI,
-            moviesBackend = MoviesBackend()
+            moviesBackend = KtorMoviesBackend()
         )
 }
