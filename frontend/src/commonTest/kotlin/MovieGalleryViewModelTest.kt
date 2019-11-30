@@ -10,7 +10,13 @@ import kotlin.test.Test
 class MovieGalleryViewModelTest {
 
     private val movieGallery = MovieGallery(emptyList())
-    private val backend = object : MoviesBackend {
+
+    private val repository = object : MovieGalleryRepository {
+
+        override suspend fun refresh() {}
+
+        override fun observeMovies(onResultsChanged: () -> Unit) {}
+
         override suspend fun movieGallery(): MovieGallery = runBlocking(EmptyCoroutineContext) {
             MovieGallery(emptyList())
         }
@@ -32,7 +38,7 @@ class MovieGalleryViewModelTest {
         }
 
     }
-    private val viewModel = MovieGalleryViewModel(Dispatchers.Unconfined, backend)
+    private val viewModel = MovieGalleryViewModel(Dispatchers.Unconfined, repository)
 
     @Test
     fun render_movieGallery_from_backend() = suspendTest {

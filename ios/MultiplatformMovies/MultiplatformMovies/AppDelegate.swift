@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MoviesFrontend
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let dependencyProvider = DependencyProvider()
+        dependencyProvider.doInitDependencyProvider(sqlDriver: MoviesDbSQLDriverKt.moviesDbSQLDriver)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let flowLayout = UICollectionViewFlowLayout()
