@@ -1,6 +1,5 @@
 package eu.tobiasheine.movies.frontend
 
-import com.squareup.sqldelight.Query
 import eu.tobiasheine.movies.frontend.db.MoviesDb
 import eu.tobiasheine.movies.data.MovieGallery
 import eu.tobiasheine.movies.data.MovieGalleryItem
@@ -11,24 +10,12 @@ interface MovieGalleryRepository {
     suspend fun movieGallery(): MovieGallery
 
     suspend fun refresh()
-
-    fun observeMovies(onResultsChanged: () -> Unit)
 }
 
 class MovieGalleryRepositoryImpl(
     private val moviesDb: MoviesDb,
-    private val moviesBackend: KtorMoviesBackend
+    private val moviesBackend: MoviesBackend
 ) : MovieGalleryRepository {
-
-    private val selectAllMovieItems = moviesDb.movieGalleryQueries.selectAllMovieItems()
-
-    override fun observeMovies(onResultsChanged: () -> Unit) {
-        selectAllMovieItems.addListener(object :Query.Listener {
-            override fun queryResultsChanged() {
-                onResultsChanged()
-            }
-        })
-    }
 
     override suspend fun refresh() {
         moviesBackend
@@ -37,6 +24,7 @@ class MovieGalleryRepositoryImpl(
     }
 
     override suspend fun movieGallery(): MovieGallery {
+        val selectAllMovieItems = moviesDb.movieGalleryQueries.selectAllMovieItems()
         return MovieGallery(selectAllMovieItems.executeAsList().asDataItems())
     }
 }

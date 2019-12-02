@@ -1,11 +1,14 @@
 package eu.tobiasheine.movies.frontend
 
+import co.touchlab.stately.concurrency.AtomicReference
+import co.touchlab.stately.freeze
 import com.squareup.sqldelight.db.SqlDriver
 import eu.tobiasheine.movies.frontend.db.MoviesDb
+import kotlin.reflect.KProperty
 
 object DependencyProvider {
 
-    private lateinit var sqlDriver: SqlDriver
+    private var sqlDriver: SqlDriver by FrozenDelegate()
 
     fun initDependencyProvider(sqlDriver: SqlDriver) {
         this.sqlDriver = sqlDriver
@@ -21,4 +24,13 @@ object DependencyProvider {
             uiContext = UI,
             movieGalleryRepository = provideRepository()
         )
+}
+
+internal class FrozenDelegate<T>{
+    private val delegateReference = AtomicReference<T?>(null)
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): T = delegateReference.get()!!
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+        delegateReference.set(value.freeze())
+    }
 }

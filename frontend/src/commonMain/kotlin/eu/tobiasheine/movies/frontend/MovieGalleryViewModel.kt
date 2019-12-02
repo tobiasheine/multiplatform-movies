@@ -19,21 +19,20 @@ class MovieGalleryViewModel(
         }
 
     fun loadMovies() = launch {
-        val gallery = movieGalleryRepository.movieGallery()
-        listener.onMovieGallery(gallery)
+        val cachedGallery = movieGalleryRepository.movieGallery()
+        listener.onMovieGallery(cachedGallery)
+
+        movieGalleryRepository.refresh()
+        val freshGallery = movieGalleryRepository.movieGallery()
+        if (freshGallery != cachedGallery) {
+            listener.onMovieGallery(freshGallery)
+        }
+
     }
 
     fun setListener(listener: Listener) {
         job = Job()
         this.listener = listener
-        movieGalleryRepository.observeMovies {
-            loadMovies()
-        }
-        refreshMovies()
-    }
-
-    private fun refreshMovies() = launch {
-        movieGalleryRepository.refresh()
     }
 
     fun clear() {

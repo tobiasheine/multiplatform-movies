@@ -1,6 +1,7 @@
-package eu.tobiasheine.movies.frontend
-
 import eu.tobiasheine.movies.data.MovieGallery
+import eu.tobiasheine.movies.data.MovieGalleryItem
+import eu.tobiasheine.movies.frontend.MovieGalleryRepository
+import eu.tobiasheine.movies.frontend.MovieGalleryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
@@ -9,28 +10,27 @@ import kotlin.test.Test
 
 class MovieGalleryViewModelTest {
 
-    private val movieGallery = MovieGallery(emptyList())
+    private val emptyMovieGallery = MovieGallery(emptyList())
+    private val singleItemMovieGallery = MovieGallery(
+        items = listOf(
+            MovieGalleryItem(movieId = 1L, thumbnailUrl = "some url")
+        )
+    )
 
-    private val repository = object : MovieGalleryRepository {
-
-        override suspend fun refresh() {}
-
-        override fun observeMovies(onResultsChanged: () -> Unit) {}
-
-        override suspend fun movieGallery(): MovieGallery = runBlocking(EmptyCoroutineContext) {
-            MovieGallery(emptyList())
-        }
-    }
+    private val repository = TestMovieGalleryRepository(
+        cachedMovieGallery = emptyMovieGallery,
+        freshMovieGallery = singleItemMovieGallery
+    )
     private val listener = object : MovieGalleryViewModel.Listener {
 
-        private lateinit var movieGallery: MovieGallery
+        private val receivedGalleries: MutableList<MovieGallery> = mutableListOf()
 
         override fun onMovieGallery(movieGallery: MovieGallery) {
-            this.movieGallery = movieGallery
+            receivedGalleries.add(movieGallery)
         }
 
-        fun verify(expectedMovieGallery: MovieGallery) {
-            assert(movieGallery == expectedMovieGallery)
+        fun verify(expectedMovieGalleries: List<MovieGallery>) {
+            assert(receivedGalleries == expectedMovieGalleries)
         }
 
         override fun onError(throwable: Throwable) {
@@ -38,15 +38,53 @@ class MovieGalleryViewModelTest {
         }
 
     }
-    private val viewModel = MovieGalleryViewModel(Dispatchers.Unconfined, repository)
+    private val viewModel = MovieGalleryViewModel(Dispatchers.Unconfined, repository as MovieGalleryRepository)
 
     @Test
-    fun render_movieGallery_from_backend() = suspendTest {
+    fun render_cached_and_fresh_movieGallery_from_backend() = suspendTest {
         viewModel.setListener(listener)
 
         viewModel.loadMovies().join()
 
-        listener.verify(movieGallery)
+        listener.verify(listOf(emptyMovieGallery, singleItemMovieGallery))
+    }
+
+    @Test
+    fun given_cached_gallery_up_to_date_then_skip_fresh_one() = suspendTest {
+        repository.updateState(
+            cachedMovieGallery = singleItemMovieGallery,
+            freshMovieGallery = singleItemMovieGallery
+        )
+        viewModel.setListener(listener)
+
+        viewModel.loadMovies().join()
+
+        listener.verify(listOf(singleItemMovieGallery))
+    }
+
+}
+
+class TestMovieGalleryRepository(
+    private var cachedMovieGallery: MovieGallery,
+    private var freshMovieGallery: MovieGallery
+) : MovieGalleryRepository {
+
+    private var currentGallery = cachedMovieGallery
+
+
+    fun updateState(cachedMovieGallery: MovieGallery, freshMovieGallery: MovieGallery) {
+        currentGallery = cachedMovieGallery
+        this.cachedMovieGallery = cachedMovieGallery
+        this.freshMovieGallery = freshMovieGallery
+
+    }
+
+    override suspend fun movieGallery() = runBlocking(EmptyCoroutineContext) {
+        currentGallery
+    }
+
+    override suspend fun refresh() = runBlocking(EmptyCoroutineContext) {
+        currentGallery = freshMovieGallery
     }
 
 }
