@@ -2,9 +2,7 @@ import eu.tobiasheine.movies.data.MovieGallery
 import eu.tobiasheine.movies.data.MovieGalleryItem
 import eu.tobiasheine.movies.frontend.MovieGalleryRepository
 import eu.tobiasheine.movies.frontend.MovieGalleryViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -77,7 +75,6 @@ class TestMovieGalleryRepository(
         currentGallery = cachedMovieGallery
         this.cachedMovieGallery = cachedMovieGallery
         this.freshMovieGallery = freshMovieGallery
-
     }
 
     override suspend fun movieGallery() = runBlocking(EmptyCoroutineContext) {
