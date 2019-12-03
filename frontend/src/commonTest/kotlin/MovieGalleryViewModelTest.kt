@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class MovieGalleryViewModelTest {
 
@@ -30,7 +31,7 @@ class MovieGalleryViewModelTest {
         }
 
         fun verify(expectedMovieGalleries: List<MovieGallery>) {
-            assert(receivedGalleries == expectedMovieGalleries)
+            assertEquals(expectedMovieGalleries, receivedGalleries)
         }
 
         override fun onError(throwable: Throwable) {
@@ -88,9 +89,3 @@ class TestMovieGalleryRepository(
     }
 
 }
-
-fun <T> runBlocking(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T =
-    kotlinx.coroutines.runBlocking(context, block)
-
-fun <T> suspendTest(block: suspend CoroutineScope.() -> T): T =
-    kotlinx.coroutines.runBlocking(EmptyCoroutineContext, block)
