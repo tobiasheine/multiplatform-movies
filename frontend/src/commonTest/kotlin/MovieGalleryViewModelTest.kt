@@ -70,7 +70,6 @@ class TestMovieGalleryRepository(
 
     private var currentGallery = cachedMovieGallery
 
-
     fun updateState(cachedMovieGallery: MovieGallery, freshMovieGallery: MovieGallery) {
         currentGallery = cachedMovieGallery
         this.cachedMovieGallery = cachedMovieGallery

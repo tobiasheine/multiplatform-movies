@@ -51,14 +51,14 @@ class MovieGalleryRepositoryImplTest {
     }
 
     @Test
-    fun movieGallery_from_DataBase() = suspendTest {
+    fun given_database_has_gallery_then_return_cached_gallery() = suspendTest {
         val movieGallery = repository.movieGallery()
 
         assertEquals(cachedGallery, movieGallery)
     }
 
     @Test
-    fun refresh_movieGallery_using_backend() = suspendTest {
+    fun given_backend_has_fresh_gallery_then_update_database() = suspendTest {
         repository.refresh()
         val movieGallery = repository.movieGallery()
 
