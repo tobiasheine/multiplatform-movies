@@ -1,0 +1,11 @@
+CREATE TABLE movieGalleryItem (
+    id INTEGER NOT NULL PRIMARY KEY,
+    thumbnailUrl TEXT NOT NULL
+);
+
+selectAllMovieItems:
+SELECT * FROM movieGalleryItem;
+
+insertMovieItem:
+INSERT OR IGNORE INTO movieGalleryItem(id, thumbnailUrl)
+VALUES (?, ?);

@@ -1,34 +1,38 @@
 package eu.tobiasheine.movies.frontend
 
 import eu.tobiasheine.movies.data.MovieGallery
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class MovieGalleryViewModel(
     private val uiContext: CoroutineContext,
-    private val moviesBackend: MoviesBackend
+    private val movieGalleryRepository: MovieGalleryRepository
 ) : CoroutineScope {
 
     private lateinit var job: Job
-    private lateinit var listerner: Listener
+    private lateinit var listener: Listener
 
     override val coroutineContext: CoroutineContext
         get() = uiContext + job + CoroutineExceptionHandler { _, throwable ->
             job = Job()
-            listerner.onError(throwable)
+            listener.onError(throwable)
         }
 
     fun loadMovies() = launch {
-        val gallery = moviesBackend.movieGallery()
-        listerner.onMovieGallery(gallery)
+        val cachedGallery = movieGalleryRepository.movieGallery()
+        listener.onMovieGallery(cachedGallery)
+
+        movieGalleryRepository.refresh()
+        val freshGallery = movieGalleryRepository.movieGallery()
+        if (freshGallery != cachedGallery) {
+            listener.onMovieGallery(freshGallery)
+        }
+
     }
 
     fun setListener(listener: Listener) {
         job = Job()
-        this.listerner = listener
+        this.listener = listener
     }
 
     fun clear() {

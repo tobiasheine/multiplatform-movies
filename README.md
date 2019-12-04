@@ -7,6 +7,12 @@ A JVM project exposing a Ktor HTTP API, including the `/movies` endpoint.
 # Frontend
 A Kotlin Multiplatform Library consuming the `/movies` endpoint, shared bei `android` & `ios`.
 
+Libraries:
+- [Ktor HTTP Client](https://ktor.io/clients/http-client/multiplatform.html)
+- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
+- [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)
+- [SQLDelight](https://github.com/cashapp/sqldelight)
+
 # Android & iOS
 Native mobile clients using the frontend library to render a movie gallery.
 
