@@ -21,6 +21,7 @@ kotlin {
     // For MacOS, should be changed to e.g. macosX64
     // For Windows, should be changed to e.g. mingwX64
     iosX64("iOS")
+    js()
     sourceSets {
         commonMain {
             dependencies {
@@ -52,6 +53,12 @@ kotlin {
             }
         }
         iOSTest {
+        }
+        jsMain {
+            dependencies {
+                implementation kotlin('stdlib-js')
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
+            }
         }
     }
 }

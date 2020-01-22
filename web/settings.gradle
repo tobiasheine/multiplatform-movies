@@ -1,0 +1,4 @@
+rootProject.name = 'web'
+
+enableFeaturePreview('GRADLE_METADATA')
+
