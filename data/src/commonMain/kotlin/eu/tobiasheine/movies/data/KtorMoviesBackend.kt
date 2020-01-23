@@ -1,6 +1,5 @@
-package eu.tobiasheine.movies.frontend
+package eu.tobiasheine.movies.data
 
-import eu.tobiasheine.movies.data.MovieGallery
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer

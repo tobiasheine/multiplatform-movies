@@ -3,6 +3,7 @@ package eu.tobiasheine.movies.frontend
 import eu.tobiasheine.movies.frontend.db.MoviesDb
 import eu.tobiasheine.movies.data.MovieGallery
 import eu.tobiasheine.movies.data.MovieGalleryItem
+import eu.tobiasheine.movies.data.MoviesBackend
 
 typealias MovieGalleryItemSQL = eu.tobiasheine.movies.frontend.db.MovieGalleryItem
 

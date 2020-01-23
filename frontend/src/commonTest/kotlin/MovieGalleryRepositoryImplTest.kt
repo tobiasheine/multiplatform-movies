@@ -3,7 +3,7 @@ import eu.tobiasheine.movies.data.MovieGallery
 import eu.tobiasheine.movies.data.MovieGalleryItem
 import eu.tobiasheine.movies.frontend.MovieGalleryRepository
 import eu.tobiasheine.movies.frontend.MovieGalleryRepositoryImpl
-import eu.tobiasheine.movies.frontend.MoviesBackend
+import eu.tobiasheine.movies.data.MoviesBackend
 import eu.tobiasheine.movies.frontend.db.MoviesDb
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.test.AfterTest

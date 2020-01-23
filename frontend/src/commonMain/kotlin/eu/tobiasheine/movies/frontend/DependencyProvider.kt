@@ -4,6 +4,7 @@ import co.touchlab.stately.concurrency.AtomicReference
 import co.touchlab.stately.freeze
 import com.squareup.sqldelight.db.SqlDriver
 import eu.tobiasheine.movies.frontend.db.MoviesDb
+import eu.tobiasheine.movies.data.KtorMoviesBackend
 import kotlin.reflect.KProperty
 
 object DependencyProvider {
