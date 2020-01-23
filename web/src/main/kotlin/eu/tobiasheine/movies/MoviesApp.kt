@@ -10,7 +10,7 @@ import react.*
 import react.dom.*
 import kotlin.coroutines.CoroutineContext
 
-class MoviesApp() : RComponent<RProps, MoviesApp.AppState>(), CoroutineScope {
+class MoviesApp : RComponent<RProps, MoviesApp.AppState>(), CoroutineScope {
     private val moviesBackend: MoviesBackend = KtorMoviesBackend()
     private var job = Job()
     override val coroutineContext: CoroutineContext
@@ -38,9 +38,7 @@ class MoviesApp() : RComponent<RProps, MoviesApp.AppState>(), CoroutineScope {
                 ul {
                     state.gallery?.items?.forEach { item ->
                         li {
-                            label {
-                                +item.thumbnailUrl
-                            }
+                            img(src = item.thumbnailUrl) {}
                         }
                     }
                 }
